@@ -122,3 +122,22 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# OAuth Settings
+OAUTH_URL_WHITELISTS = []
+
+OAUTH_CLIENT_NAME = 'github'
+
+OAUTH_CLIENT = {
+    'client_id': '838ea7dbf18436892ee9',
+    'client_secret': '9b0d5296adeeb22783d6a8032d3f512e456d39f3',
+    'access_token_url': 'https://github.com/login/oauth/access_token',
+    'authorize_url': 'https://github.com/login/oauth/authorize',
+    'api_base_url': 'https://api.github.com/',
+    'redirect_uri': 'http://127.0.0.1:8000/oauth/callback',
+    'client_kwargs': {
+        'scope': 'profile email',
+        'token_placement': 'header'
+    },
+    'userinfo_endpoint': 'user',
+}
