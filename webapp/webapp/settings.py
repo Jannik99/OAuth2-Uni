@@ -128,6 +128,7 @@ OAUTH_URL_WHITELISTS = []
 
 OAUTH_CLIENT_NAME = 'github'
 
+# Settings for GitHub OAuth
 OAUTH_CLIENT = {
     'client_id': '838ea7dbf18436892ee9',
     'client_secret': '9b0d5296adeeb22783d6a8032d3f512e456d39f3',

@@ -8,8 +8,8 @@ from django.views.generic import CreateView, UpdateView, DeleteView, DetailView,
 from webapp import settings
 
 # OAuth setup
-oauth = OAuth()
-oauth.register(settings.OAUTH_CLIENT_NAME, **settings.OAUTH_CLIENT)
+oauth = OAuth() # Create new OAUth object
+oauth.register(settings.OAUTH_CLIENT_NAME, **settings.OAUTH_CLIENT) # Register new oauth client with given settings
 
 
 # Create your views here.
@@ -22,19 +22,18 @@ class FrontView(TemplateView):
 
 
 def oauth_authorize(request):
-    github = oauth.create_client(settings.OAUTH_CLIENT_NAME)
+    github = oauth.create_client(settings.OAUTH_CLIENT_NAME) # Create new client with given name. This is a name we registered in the oauth object
     redirect_uri = 'http://127.0.0.1:8000/oauth/callback'
-    return github.authorize_redirect(request, redirect_uri)
+    return github.authorize_redirect(request, redirect_uri) # Just a redirect to the chosen Auth Provider
 
 
 def oauth_callback(request):
-    token = oauth.github.authorize_access_token(request)
-    resp = oauth.github.get('user', token=token)
-    resp.raise_for_status()
-    profile = resp.json()
+    token = oauth.github.authorize_access_token(request) # Get the token from the request
+    resp = oauth.github.get('user', token=token) # Get the response
+    resp.raise_for_status() # Raise an error if the response is not 200
+    profile = resp.json() # Get the json from the response which is the user info
     context = {
-        'profile': profile,
-        'token': token
+        'profile': profile, # Pass the profile to the context
+        'token': token # Pass the token to the context
     }
-    print(context)
     return render(request, "result.html", context)
